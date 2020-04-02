@@ -40,9 +40,9 @@ void delay(){
 void set_led(int _state){
 
 	if(_state){
-		*((volatile uint32_t*)(GPIO_B_ODR_REGISTER))|= (1 << BIT7);
+		*((volatile uint32_t*)GPIO_B_ODR_REGISTER)|= (1 << BIT7);
 	}else{
-		*((volatile uint32_t*)(GPIO_B_ODR_REGISTER)) &= ~(1 << BIT7);
+		*((volatile uint32_t*)GPIO_B_ODR_REGISTER) &= ~(1 << BIT7);
 	}
 
 }
@@ -52,9 +52,9 @@ void set_led(int _state){
 int main(void)
 {
 	//EN CLOCK FOR GPIOB
-	*((volatile uint32_t*)(RCC_AHB1ENR_REGISTER)) |= (1 << BIT1);
+	*((volatile uint32_t*)RCC_AHB1ENR_REGISTER) |= (1 << BIT1);
 	//SET PORT TO OUTPUT
-	*((volatile uint32_t*)(GPIO_B_MODE_REGISTER)) |= (1 << BIT15);
+	*((volatile uint32_t*)GPIO_B_MODE_REGISTER) |= (1 << BIT15);
 
 
 	for(;;){
