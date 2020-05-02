@@ -115,8 +115,8 @@ typedef struct
 	volatile uint32_t BDCR;		  	/* Address offset: 0x70 */
 	volatile uint32_t CSR;		  	/* Address offset: 0x74 */
 
-	volatile uint32_t __RES8__;		/*Address offset: 0x78 */
-	volatile uint32_t __RES9__;		/*Address offset: 0x7C */
+	volatile uint32_t __RES10__;		/*Address offset: 0x78 */
+	volatile uint32_t __RES11__;		/*Address offset: 0x7C */
 
 	volatile uint32_t SSCGR;	  	/* Address offset: 0x80 */
 	volatile uint32_t PLLI2CFGR;  	/* Address offset: 0x84 */
@@ -195,16 +195,16 @@ typedef struct
 
 /*
  * IRQ(Interrupt Request) Nummern für STM32F407x MCU
- * TODO: Ausfüllen der IRQ--Nummern für EXTI
+ * ADRESSE = 16*4(offset sys excep) + IRQ_NO*4
  */
 
-#define IRQ_NO_EXTI0 
-#define IRQ_NO_EXTI1 
-#define IRQ_NO_EXTI2 
-#define IRQ_NO_EXTI3 
-#define IRQ_NO_EXTI4 
-#define IRQ_NO_EXTI9_5 
-#define IRQ_NO_EXTI15_10 
+#define IRQ_NO_EXTI0 6
+#define IRQ_NO_EXTI1 7
+#define IRQ_NO_EXTI2 8
+#define IRQ_NO_EXTI3 9
+#define IRQ_NO_EXTI4 10
+#define IRQ_NO_EXTI9_5 23
+#define IRQ_NO_EXTI15_10 40
 
 /*
  * EXTI Adressen und Makros
