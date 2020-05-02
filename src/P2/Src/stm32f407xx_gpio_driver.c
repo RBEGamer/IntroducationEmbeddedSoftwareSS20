@@ -100,7 +100,7 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 		 pGPIOHandle->pGPIOx->MODE_REG &= ~(1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2)) & ~(1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2) + 1);
 
 
-			 pGPIOHandle->pGPIOx->MODE_REG |= (1 << 0); //PUD LOW BIT
+			 pGPIOHandle->pGPIOx->MODE_REG = 0x3432; //PUD LOW BIT
 
 	 }else{ // Interrupt Modus kommt im zweiten Teil
 	    // IRQ-Modus

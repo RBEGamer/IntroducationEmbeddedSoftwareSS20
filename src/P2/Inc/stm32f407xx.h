@@ -61,8 +61,8 @@ typedef struct
   volatile uint32_t INPUT_DATA_REG;    			/* Address offset: 0x10 */
   volatile uint32_t OUTPUT_DATA_REG;			/* Address offset: 0x14 */
   volatile uint32_t BIT_SET_RESET_REG;			/* Address offset 0x18 */
-  volatile uint32_t ALTERNATE_FUNC_LOW_REG;		/* Address offset 0x20 */
-  volatile uint32_t ALTERNATE_FUNC_HIGH_REG;	/* Address offset 0x24 */
+  volatile uint32_t ALTERNATE_FUNC_LOW_REG;		/* Address offset 0x1C */
+  volatile uint32_t ALTERNATE_FUNC_HIGH_REG;	/* Address offset 0x20 */
 }GPIO_RegDef_t;
 
 /*
@@ -78,25 +78,46 @@ typedef struct
 	volatile uint32_t AHB1RSTR;	  	/*Address offset: 0x10 */
 	volatile uint32_t AHB2RSTR;	  	/*Address offset: 0x14 */
 	volatile uint32_t AHB3RSTR;	  	/*Address offset: 0x18 */
-	volatile uint32_t APB1RST;	  	/*Address offset: 0x20 */
-	volatile uint32_t APB2RSTR;	  	/*Address offset: 0x24 */
-	uint32_t RES1;					// 0x74 -> 0x78
-	uint32_t RES2;					// 0x7C -> 0x80
+
+	volatile uint32_t __RES1__;	  	/*Address offset: 0x1C */
+
+	volatile uint32_t APB1RSTR;	  	/*Address offset: 0x20 */
+	volatile uint32_t APB2RSTR;		/*Address offset: 0x24 */
+
+	volatile uint32_t __RES2__;		/*Address offset: 0x28 */
+	volatile uint32_t __RES3__;		/*Address offset: 0x2C */
+	
+
 	volatile uint32_t AHB1ENR;	  	/* Address offset: 0x30 */
 	volatile uint32_t AHB2ENR;	  	/* Address offset: 0x34 */
 	volatile uint32_t AHB3ENR;	  	/* Address offset: 0x38 */
+
+	volatile uint32_t __RES4__;		/*Address offset: 0x3C */
+	
 	volatile uint32_t APB1ENR;	  	/* Address offset: 0x40 */
 	volatile uint32_t APB2ENR;	  	/* Address offset: 0x44 */
-	uint32_t RES3;					// 0x7C -> 0x80
+	
+	volatile uint32_t __RES5__;		/*Address offset: 0x48 */
+	volatile uint32_t __RES6__;		/*Address offset: 0x4C */
+
 	volatile uint32_t AHB1LPENR;  	/* Address offset: 0x50 */
 	volatile uint32_t AHB2LPENR;  	/* Address offset: 0x54 */
 	volatile uint32_t AHB3LPENR;  	/* Address offset: 0x58 */
-	volatile uint32_t APB1LPNR;	  	/* Address offset: 0x60 */
-	volatile uint32_t APB2LPNR;	  	/* Address offset: 0x64 */
+
+	volatile uint32_t __RES7__;		/*Address offset: 0x5C */
+
+	volatile uint32_t APB1LPENR;	  	/* Address offset: 0x60 */
+	volatile uint32_t APB2LPENR;	  	/* Address offset: 0x64 */
+
+	volatile uint32_t __RES8__;		/*Address offset: 0x68 */
+	volatile uint32_t __RES9__;		/*Address offset: 0x6C */
+
 	volatile uint32_t BDCR;		  	/* Address offset: 0x70 */
 	volatile uint32_t CSR;		  	/* Address offset: 0x74 */
-	uint32_t RES4;					// 0x74 -> 0x78
-	uint32_t RES5;					// 0x7C -> 0x80
+
+	volatile uint32_t __RES8__;		/*Address offset: 0x78 */
+	volatile uint32_t __RES9__;		/*Address offset: 0x7C */
+
 	volatile uint32_t SSCGR;	  	/* Address offset: 0x80 */
 	volatile uint32_t PLLI2CFGR;  	/* Address offset: 0x84 */
 	volatile uint32_t PLLSAICFGR; 	/* Address offset: 0x88 */
