@@ -80,18 +80,18 @@ int main(void)
 		GPIO_WriteToOutputPin(&led_1, GPIO_PIN_SET);
 		GPIO_WriteToOutputPin(&led_2, GPIO_PIN_RESET);
 		GPIO_WriteToOutputPin(&led_3, GPIO_PIN_RESET);
-		delay();
+		delay_s(5);
 		GPIO_WriteToOutputPin(&led_1, GPIO_PIN_SET);
 		GPIO_WriteToOutputPin(&led_2, GPIO_PIN_SET);
 		GPIO_WriteToOutputPin(&led_3, GPIO_PIN_RESET);
-		delay();
+		delay_s(5);
 		GPIO_WriteToOutputPin(&led_1, GPIO_PIN_RESET);
 		GPIO_WriteToOutputPin(&led_2, GPIO_PIN_RESET);
 		GPIO_WriteToOutputPin(&led_3, GPIO_PIN_SET);
-		delay();
+		delay_s(5);
 		GPIO_WriteToOutputPin(&led_1, GPIO_PIN_RESET);
 		GPIO_WriteToOutputPin(&led_2, GPIO_PIN_RESET);
 		GPIO_WriteToOutputPin(&led_3, GPIO_PIN_RESET);
-		delay();
+		delay_s(5);
 	}
 }
