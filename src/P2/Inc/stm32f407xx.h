@@ -31,7 +31,7 @@
  */
 
 #define GPIOA_BASEADDR					(AHB1PERIPH_BASEADDR + 0x0000U)
-#define GPIOB_BASEADDR					(AHB1PERIPH_BASEADDR + 0x0400U)
+#define GPIOB_BASEADDR					0x40020c00U//(AHB1PERIPH_BASEADDR + 0x0400U)
 #define GPIOC_BASEADDR					(AHB1PERIPH_BASEADDR + 0x0800U)
 #define GPIOD_BASEADDR					(AHB1PERIPH_BASEADDR + 0x0C00U)
 #define GPIOE_BASEADDR 					(AHB1PERIPH_BASEADDR + 0x1000U)
@@ -43,7 +43,7 @@
 /*
  * Basis Adresses des Reset and Clock control Module (RCC)
  */
-#define RCC_BASEADDR 0x40023800
+#define RCC_BASEADDR 0x40023800U
 
 /********************************** Register definition structs **********************************/
 

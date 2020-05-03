@@ -11,6 +11,12 @@
 
 #include "stm32f407xx_gpio_driver.h"
 
+#define AHB1ENR 0x40023800U
+#define GPIOBEN 0x30U
+
+
+
+
 
 
 void delay(){
@@ -29,34 +35,23 @@ void EXTI0_IRQHandler(void){
 
 int main(void)
 {
+	*((volatile uint32_t*)(AHB1ENR+GPIOBEN)) |=(1 << 3);
+
 	GPIO_Handle_t led_1;
 	GPIO_PinConfig_t led_1_pin_config;
 
 	led_1_pin_config.GPIO_PinMode = GPIO_MODE_OUT;
-	led_1_pin_config.GPIO_PinNumber = GPIO_PIN_NO_0;
+	led_1_pin_config.GPIO_PinNumber = GPIO_PIN_NO_15;
 	led_1_pin_config.GPIO_PinOPType = GPIO_OP_TYPE_PP; //?
 	led_1_pin_config.GPIO_PinPuPdControl = GPIO_NO_PUPD;
 	led_1_pin_config.GPIO_PinSpeed = GPIO_SPEED_LOW;
 
 	led_1.GPIO_PinConfig = led_1_pin_config;
-	led_1.pGPIOx = GPIOH_BASEADDR;
+	led_1.pGPIOx = GPIOB_BASEADDR;
 
 	GPIO_Init(&led_1);
 
-	//USER BUTTON PA0
-	GPIO_Handle_t user_button;
-	GPIO_PinConfig_t user_button_pin_config;
 
-	user_button_pin_config.GPIO_PinMode = GPIO_MODE_IT_FT;
-	user_button_pin_config.GPIO_PinNumber = GPIO_PIN_NO_0;
-	user_button_pin_config.GPIO_PinOPType = GPIO_OP_TYPE_PP; //?
-	user_button_pin_config.GPIO_PinPuPdControl = GPIO_NO_PUPD;
-	user_button_pin_config.GPIO_PinSpeed = GPIO_SPEED_LOW;
-
-	user_button.GPIO_PinConfig = user_button_pin_config;
-	user_button.pGPIOx = GPIOA_BASEADDR;
-	GPIO_Init(&user_button); //INIT GPIO	
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI0,ENABLE); //INIT IRQ
 
 
 	 for (;;){

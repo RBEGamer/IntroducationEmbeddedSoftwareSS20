@@ -96,11 +96,14 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 	 //Konfigurieren des OUTPUT-Modus
 	 if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG)
 	 {
-		 //RESET MODE REG
+		 //RESET MODE REG =  INPUT
 		 pGPIOHandle->pGPIOx->MODE_REG &= ~(1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2)) & ~(1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2) + 1);
 
+		 if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_OUT)
+			 {
+			 pGPIOHandle->pGPIOx->MODE_REG |= (1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber*2));
+			 }
 
-			 pGPIOHandle->pGPIOx->MODE_REG = 0x3432; //PUD LOW BIT
 
 	 }else{ // Interrupt Modus kommt im zweiten Teil
 	    // IRQ-Modus
@@ -133,12 +136,12 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 	 {
 		 pGPIOHandle->pGPIOx->PULL_UP_DOWN |= (1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2)); //PUD LOW BIT
 	 }
-	 if (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed & 0b10)
+	 if (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl & 0b10)
 	 {
 		 pGPIOHandle->pGPIOx->PULL_UP_DOWN |= (1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2) + 1); //PUD HIGH BIT
 	 }
 
-	 //Konfigurieren des Output modus ?????? war doch schon
+
 	 
 }
 
