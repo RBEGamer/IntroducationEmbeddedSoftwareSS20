@@ -71,19 +71,27 @@ int main(void)
 	led_3_pin_config.GPIO_PinOPType = GPIO_OP_TYPE_PP; //?
 	led_3_pin_config.GPIO_PinPuPdControl = GPIO_NO_PUPD;
 	led_3_pin_config.GPIO_PinSpeed = GPIO_SPEED_LOW;
-	led_3.GPIO_PinConfig = led_2_pin_config;
+	led_3.GPIO_PinConfig = led_3_pin_config;
 	led_3.pGPIOx = GPIOB_BASEADDR;
 	GPIO_Init(&led_3);
 
 
 	 for (;;){
 		GPIO_WriteToOutputPin(&led_1, GPIO_PIN_SET);
-		GPIO_WriteToOutputPin(&led_2, GPIO_PIN_SET);
-		GPIO_WriteToOutputPin(&led_3, GPIO_PIN_SET);
+		GPIO_WriteToOutputPin(&led_2, GPIO_PIN_RESET);
+		GPIO_WriteToOutputPin(&led_3, GPIO_PIN_RESET);
 		delay();
 		GPIO_WriteToOutputPin(&led_1, GPIO_PIN_SET);
+		GPIO_WriteToOutputPin(&led_2, GPIO_PIN_SET);
+		GPIO_WriteToOutputPin(&led_3, GPIO_PIN_RESET);
+		delay();
+		GPIO_WriteToOutputPin(&led_1, GPIO_PIN_RESET);
 		GPIO_WriteToOutputPin(&led_2, GPIO_PIN_RESET);
 		GPIO_WriteToOutputPin(&led_3, GPIO_PIN_SET);
+		delay();
+		GPIO_WriteToOutputPin(&led_1, GPIO_PIN_RESET);
+		GPIO_WriteToOutputPin(&led_2, GPIO_PIN_RESET);
+		GPIO_WriteToOutputPin(&led_3, GPIO_PIN_RESET);
 		delay();
 	}
 }
