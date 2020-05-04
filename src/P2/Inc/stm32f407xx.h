@@ -218,10 +218,9 @@ typedef struct
 #define SYSCFG				((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 /*
  * Clock Enable und Disable Makros für SYSCFG
- * TODO: Vervollständigen Sie die Makros zum anschalten und Abschalten der Syscfg Clock
  */
-#define SYSCFG_PCLK_EN() //(SYSCFG->CR |= (1 << 0))
-#define SYSCFG_PCLK_DI() //(SYSCFG->CR &= ~(1 << 0))
+#define SYSCFG_PCLK_EN() (RCC->APB2ENR |= (1 << 14))//BIT 14
+#define SYSCFG_PCLK_DI() (RCC->APB2ENR &= ~(1 << 14))
 
 /*
  * Register struct EXTI
