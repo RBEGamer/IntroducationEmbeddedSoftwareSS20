@@ -249,11 +249,11 @@ void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 	if (EnorDi == ENABLE)
 	{
 		//ToDo: Programmieren der entsprechenden ISERx register
-		
-			//*((volatile uint32_t*)(NVIC_ISER0) |= (1<<(uint32_t)IRQNumber));
-	}
-	else
-	{
+	//	*((volatile uint32_t*)NVIC_ISER0)[(uint32_t)((int32_t)IRQNumber) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQNumber) & (uint32_t)0x1F));
+		*((volatile uint32_t*)NVIC_ISER0) |= (1<< IRQNumber);
+	//	NVIC->ICER0[IRQNumber] = 1;
+	}else{
+		*((volatile uint32_t*)NVIC_ICER0) |= (1<< IRQNumber);
 		//ToDo: Programmieren der entsprechenden ICERx register
 	}
 }

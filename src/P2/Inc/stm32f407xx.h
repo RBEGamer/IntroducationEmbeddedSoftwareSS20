@@ -182,16 +182,36 @@ typedef struct
 /*
  * ARM Cortex Mx Processor NVIC register Addresses
  */
+#define NVIC_BASEADDR 0xe000e100
 
-#define NVIC_ISER0 	((0x100 + (0x04*0))
-#define NVIC_ISER1 	((0x100 + (0x04*1))
-#define NVIC_ISER2 	((0x100 + (0x04*2))
-#define NVIC_ISER3 	((0x100 + (0x04*3))
+#define NVIC_ISER0 	0xe000e100
+#define NVIC_ISER1 	0xe000e104
+#define NVIC_ISER2 	0xe000e108
 
-#define NVIC_ICER0 	((0x180 + (0x04*0))
-#define NVIC_ICER1	((0x180 + (0x04*1))
-#define NVIC_ICER2  ((0x180 + (0x04*2))
-#define NVIC_ICER3	((0x180 + (0x04*3))
+
+#define NVIC_ICER0 	0xe000e180
+#define NVIC_ICER1	0xe000e184
+#define NVIC_ICER2  0xe000e188
+
+
+typedef struct
+{
+	volatile uint32_t ISER0;   //
+	volatile uint32_t ISER1;   //
+	volatile uint32_t ISER2;   //
+
+	volatile uint32_t RESERVED[78];   //
+
+	volatile uint32_t ICER0;   //
+	volatile uint32_t ICER1;   //
+	volatile uint32_t ICER2;   //
+
+
+}NVIC_RegDef_t;
+
+#define NVIC				((NVIC_RegDef_t*)NVIC_BASEADDR)
+
+
 
 /*
  * IRQ(Interrupt Request) Nummern für STM32F407x MCU

@@ -34,10 +34,10 @@ void delay(){
 
 //HANDLING IRQ FOR USER BUTTON
 void EXTI0_IRQHandler(void){
-	GPIO_WriteToOutputPin(&led_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(&led_1, GPIO_PIN_SET);
 	GPIO_WriteToOutputPin(&led_2, GPIO_PIN_RESET);
 	GPIO_WriteToOutputPin(&led_3, GPIO_PIN_RESET);
-
+	delay_s(7);
 	GPIO_IRQHandling(GPIO_PIN_NO_0); //CLEAR PA FOR USER_BUTTON PA0
 }
 
