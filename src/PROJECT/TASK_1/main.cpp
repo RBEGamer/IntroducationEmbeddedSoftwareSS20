@@ -8,7 +8,8 @@
 #include <wiringPi.h>
 //------------ INCLUDES MOTORHAT- ------------ //
 #include "adafruitmotorhat.h"
-
+#define FORWARD AdafruitDCMotor::kForward
+#define BACKWARD AdafruitDCMotor::kBackward
 //----------------- CONSTANT VARS AND DEFINES ---------- //
 #define LED_LEFT 29  //LED LINKS AN PIN WIRING_29
 #define LED_RIGHT 28 //LED RECHTS AN PIN WIRING_28
@@ -75,8 +76,8 @@ int main()
   // SET MOTOR TO FORWARD  WITH SPEED 60
   motor_left->setSpeed(60);
   motor_right->setSpeed(60);
-  motor_left->run(AdafruitDCMotor::kForward);
-  motor_right->run(AdafruitDCMotor::kForward);
+  motor_left->run(FORWARD);
+  motor_right->run(FORWARD);
 
   //SOME LED BLINKING
   for (;;)
