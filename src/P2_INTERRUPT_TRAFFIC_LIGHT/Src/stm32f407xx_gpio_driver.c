@@ -147,13 +147,15 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 	//RESET PULL_UP_DOWN
 	pGPIOHandle->pGPIOx->PULL_UP_DOWN &= ~(1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2)) & ~(1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2) + 1);
 
-	if (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl & 0b01)
+	if (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl & GPIO_PIN_PD)
 	{
 		pGPIOHandle->pGPIOx->PULL_UP_DOWN |= (1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2)); //PUD LOW BIT
 	}
-	if (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl & 0b10)
+	if (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl & GPIO_PIN_PU)
 	{
 		pGPIOHandle->pGPIOx->PULL_UP_DOWN |= (1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2) + 1); //PUD HIGH BIT
+	}else if(pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl & GPIO_NO_PUPD){
+		//NO PULLUP/PULLDOWN
 	}
 }
 
