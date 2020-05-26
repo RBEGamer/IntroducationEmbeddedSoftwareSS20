@@ -10,6 +10,8 @@
 #include "adafruitmotorhat.h"
 #define FORWARD AdafruitDCMotor::kForward
 #define BACKWARD AdafruitDCMotor::kBackward
+#define RELEASE AdafruitDCMotor::kRelease
+#define STOP RELEASE
 //----------------- CONSTANT VARS AND DEFINES ---------- //
 #define LED_LEFT 29  //LED LINKS AN PIN WIRING_29
 #define LED_RIGHT 28 //LED RECHTS AN PIN WIRING_28
