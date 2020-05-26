@@ -134,13 +134,14 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 	//RESET SPEED REGISTER TO DEFAULT
 	pGPIOHandle->pGPIOx->OUTPUT_SPEED &= ~(1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2)) & ~(1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2) + 1);
 
-	if (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed & 0b01)
+	if (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed & GPIO_SPEED_MEDIUM ||)
 	{
 		pGPIOHandle->pGPIOx->OUTPUT_SPEED |= (1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2)); //SPEED LOW BIT
 	}
-	if (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed & 0b10)
+	else if (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed & GPIO_SPEED_FAST || pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed & GPOI_SPEED_HIGH)
 	{
 		pGPIOHandle->pGPIOx->OUTPUT_SPEED |= (1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber * 2) + 1); //SPEED HIGH BIT
+		
 	}
 
 	//Konfigurieren des Pull-up/down Settings
