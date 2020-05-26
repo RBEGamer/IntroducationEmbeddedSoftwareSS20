@@ -1,5 +1,9 @@
-main.out: i2cdevice.cpp i2cdevice.h util.h
+main: main.cpp adafruitmotorhat.h pwm.h i2cdevice.h adafruitdcmotor.h
+
+adafruitmotorhat.h:
+
+pwm.h:
 
 i2cdevice.h:
 
-util.h:
+adafruitdcmotor.h:
