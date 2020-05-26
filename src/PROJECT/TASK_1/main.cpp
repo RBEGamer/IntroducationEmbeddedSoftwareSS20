@@ -1,27 +1,29 @@
-#include <stdio.h>
-#include <wiringPi.h>
+#include <thread>
+#include <chrono>
+#include "adafruitmotorhat.h"
 
-// LED Pin - wiringPi pin 0 is BCM_GPIO 17.
-
-#define LED_LEFT  29
-#define LED_RIGHT 28
-bool led_state = false;
-int main (void)
+int main()
 {
-  printf ("Raspberry Pi - Gertboard Blink\n") ;
+  using namespace std::chrono_literals;
 
-  wiringPiSetup () ;
+  // connect using the default device address 0x60
+  AdafruitMotorHAT hat;
 
-  pinMode (LED_LEFT, OUTPUT);
-  pinMode(LED_RIGHT, OUTPUT);
-
-  for (;;)
+  // get the motor connected to port 1
+  if (auto motor{hat.getMotor(1)})
   {
-    led_state = !led_state;
-    digitalWrite(LED_LEFT, led_state); // On
-    digitalWrite(LED_RIGHT, !led_state); // On
-    delay (500) ;               
-   
+    // speed must be set before running commands
+    motor->setSpeed(255);
+
+    motor->run(AdafruitDCMotor::kForward);
+    std::this_thread::sleep_for(1s);
+
+    motor->run(AdafruitDCMotor::kBackward);
+    std::this_thread::sleep_for(1s);
+
+    // release the motor after use
+    motor->run(AdafruitDCMotor::kRelease);
   }
-  return 0 ;
+
+  return 0;
 }

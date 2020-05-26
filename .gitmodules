@@ -1,0 +1,3 @@
+[submodule "src/PROJECT/TASK_1/src/PROJECT/TASK_1/adafruit-motor-hat-cpp-library"]
+	path = src/PROJECT/TASK_1/src/PROJECT/TASK_1/adafruit-motor-hat-cpp-library
+	url = https://github.com/tomfclarke/adafruit-motor-hat-cpp-library
