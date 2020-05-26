@@ -1,54 +1,93 @@
+//------------ GENERAL INCLUDES -------------- //
 #include <stdio.h>
-#include <wiringPi.h>
-
+#include <signal.h>
+#include <iostream>
 #include <thread>
 #include <chrono>
+//------------ INCLUDES WIRING PI ------------ //
+#include <wiringPi.h>
+//------------ INCLUDES MOTORHAT- ------------ //
 #include "adafruitmotorhat.h"
 
+//----------------- CONSTANT VARS AND DEFINES ---------- //
 #define LED_LEFT 29  //LED LINKS AN PIN WIRING_29
 #define LED_RIGHT 28 //LED RECHTS AN PIN WIRING_28
 
+//--------------- GLOBALS ------------------ //
 bool led_state = false;
+
+std::shared_ptr<AdafruitDCMotor> motor_left = nullptr;
+std::shared_ptr<AdafruitDCMotor> motor_right = nullptr;
+
+//SHUTDOWN MOTORS, FREE ALL STUFF, RELEASE SENSORS ETC
+void clear_anything()
+{
+  //------------- GPIO RELEASE --------------- //
+  //note wiring pi has no cleanup -> so change all pins back to input
+  pinMode(LED_LEFT, INPUT);
+  pinMode(LED_RIGHT, INPUT);
+
+  //------------ MOTOR RELEASE ------------- //
+  if (motor_left)
+  {
+    motor_left->run(AdafruitDCMotor::kRelease); //STOPS LEFT MOTOR IF USED
+  }
+  if (motor_right)
+  {
+    motor_right->run(AdafruitDCMotor::kRelease); //STOPS RIGHT MOROE IF USED
+  }
+}
+/// Interrupt Routine for STRG-C
+void signalHandler(int signum)
+{
+  std::cout << "Strg-C Programmende" << std::endl;
+
+  clear_anything();
+
+  exit(signum);
+}
 
 int main()
 {
- 
+  //REGISTER SIGNAL HANDLER
+  signal(SIGINT, signalHandler);
+  //WIRING PI SETUP AND GPIO SETUP
   wiringPiSetup();
-
   pinMode(LED_LEFT, OUTPUT);
   pinMode(LED_RIGHT, OUTPUT);
-  // connect using the default device address 0x60
+  //MOTORHAT SETUP
   AdafruitMotorHAT hat;
 
-  // get the motor connected to port 1
-  auto motor_left = hat.getMotor(1);
-  auto motor_right = hat.getMotor(2);
+  //REQUEST MOTORS FROM THE HEAD
+  motor_left = hat.getMotor(1);
+  motor_right = hat.getMotor(2);
 
-  motor_left->setSpeed(75);
-  motor_right->setSpeed(75);
 
+  //INIT MOTORS
+  motor_left->setSpeed(0);
+  motor_right->setSpeed(0);
+
+  if(!motor_left && !motor_right){
+    clear_anything();
+    return -1;
+  }
+
+  // SET MOTOR TO FORWARD  WITH SPEED 60
+  motor_left->setSpeed(60);
+  motor_right->setSpeed(60);
   motor_left->run(AdafruitDCMotor::kForward);
-  motor_right->run(AdafruitDCMotor::kBackward);
+  motor_right->run(AdafruitDCMotor::kForward);
 
+  //SOME LED BLINKING
   for (;;)
   {
-
     led_state = !led_state;
     digitalWrite(LED_LEFT, led_state);   // On
     digitalWrite(LED_RIGHT, !led_state); // On
     delay(500);
-
-     
-    
-    // speed must be set before running commands
-   
-
-    
-
-    // release the motor after use
-   
   }
-  motor_left->run(AdafruitDCMotor::kRelease);
-  motor_right->run(AdafruitDCMotor::kRelease);
+
+  //CLEANUP ANYTHING
+  clear_anything();
   return 0;
 }
