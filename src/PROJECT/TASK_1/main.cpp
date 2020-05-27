@@ -1,5 +1,6 @@
 //------------ GENERAL INCLUDES -------------- //
 #include <stdio.h>
+#include <cmath> //FOR SIN
 #include <signal.h>
 #include <iostream>
 #include <thread>
@@ -40,6 +41,7 @@ void clear_anything()
     motor_right->run(AdafruitDCMotor::kRelease); //STOPS RIGHT MOROE IF USED
   }
 }
+
 /// Interrupt Routine for STRG-C
 void signalHandler(int signum)
 {
@@ -50,8 +52,37 @@ void signalHandler(int signum)
   exit(signum);
 }
 
+void drive_forward(int _speed)
+{
+  motor_left->setSpeed(_speed);
+  motor_right->setSpeed(_speed);
+  motor_left->run(FORWARD);
+  motor_right->run(FORWARD);
+}
+
+
+
+void drive_sine_wave(int _base_speed = 70, int _sine_multiplier = 40, int _delay = 7)
+{
+  motor_left->run(FORWARD);
+  motor_right->run(FORWARD);
+  for (int i = 0; i < 360*5; i++)
+  {
+    float s = std::sin(i/100.0)*0.8;
+
+    motor_right->setSpeed(_base_speed + _sine_multiplier * s);
+    motor_left->setSpeed(_base_speed  + (1.0-_sine_multiplier) * s);
+
+    delay(_delay);
+  }
+
+  motor_left->run(STOP);
+  motor_right->run(STOP);
+}
+
 int main()
 {
+  
   //REGISTER SIGNAL HANDLER
   signal(SIGINT, signalHandler);
   //WIRING PI SETUP AND GPIO SETUP
@@ -65,24 +96,28 @@ int main()
   motor_left = hat.getMotor(1);
   motor_right = hat.getMotor(2);
 
-
   //INIT MOTORS
   motor_left->setSpeed(0);
   motor_right->setSpeed(0);
 
-  if(!motor_left && !motor_right){
+  if (!motor_left && !motor_right)
+  {
     clear_anything();
     return -1;
   }
 
   // SET MOTOR TO FORWARD  WITH SPEED 60
-  motor_left->setSpeed(60);
-  motor_right->setSpeed(60);
-  motor_left->run(FORWARD);
-  motor_right->run(FORWARD);
+  //drive_forward(70);
+  //delay(500);
+  //drive_rectangle(70);
+  //delay(2000);
+  //drive_sine_wave(70);
+  //delay(2000);
 
+  motor_left->run(AdafruitDCMotor::kRelease);
+  motor_right->run(AdafruitDCMotor::kRelease);
   //SOME LED BLINKING
-  for (;;)
+  for (int i = 0; i < 3; i++)
   {
     led_state = !led_state;
     digitalWrite(LED_LEFT, led_state);   // On
@@ -90,7 +125,9 @@ int main()
     delay(500);
   }
 
+  drive_sine_wave();
   //CLEANUP ANYTHING
   clear_anything();
+
   return 0;
 }
