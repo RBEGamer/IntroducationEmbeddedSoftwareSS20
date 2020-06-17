@@ -51,6 +51,7 @@ void clear_anything()
 /// Interrupt Routine for STRG-C
 void signalHandler(int signum)
 {
+  motors.drive_stop();
   std::cout << "Strg-C Programmende" << std::endl;
   clear_anything(); //CLEAR ANYTHING AFTER SIGNAL TO STOP MOTORS AND SENSORS
   exit(signum);
