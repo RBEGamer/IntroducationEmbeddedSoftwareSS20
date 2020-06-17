@@ -1,4 +1,4 @@
-// Einführung Embedded Software - SS2020 - 55646
+// EinfÃ¼hrung Embedded Software - SS2020 - 55646
 //ProjektPhase Buggy - Gruppe G
 //Marcel Ochsendorf 11.06.2020
 //marcelochsendorf.com
@@ -45,6 +45,7 @@ UltrasonicDriver ultraschall;
 /// Interrupt Routine for STRG-C
 void signalHandler(int signum)
 {
+  motors.drive_stop();
   std::cout << "Strg-C Programmende" << std::endl;
   exit(signum);
 }
@@ -57,9 +58,9 @@ float get_gyroscope_degree_step() {
             
 
     //BERECHNE DAS DELTA DER ZEIT WIE LANGE ES GEDAUERT HAT BIS DIE FUNKTION AUFGERUFEN WURDE
-    //DIES IST NÖTIG DA HIER DER GYRO WERT INTEGRIERT WERDEN MUSS UND DIES GEHT NUR MIT DEM DELTA DER ZEIT
+    //DIES IST NÃ–TIG DA HIER DER GYRO WERT INTEGRIERT WERDEN MUSS UND DIES GEHT NUR MIT DEM DELTA DER ZEIT
     //BEI DER RECHECK FAHREN AUFGABE (umsetzung mit gyro) WAR DIE DELTAZEIT IMMER FEST 10ms
-    //HIER IST ER DYNAMISCH FÜR DIE KONTINULIERLICHE REGELUNG
+    //HIER IST ER DYNAMISCH FÃœR DIE KONTINULIERLICHE REGELUNG
 
          std::chrono::duration<double> TimeElapsed_s = std::chrono::high_resolution_clock::now() - start;
          start = std::chrono::high_resolution_clock::now();
@@ -111,13 +112,13 @@ int main()
 
 
 
-  //------------ TASK_4 3 LINIE FAHREN GYROSKOP GESTÜTZT-------------------- //
-  //ALLGEMIN KÖNNTE FÜR DIE ACCELERATION REGELUNG EIN PID REGLER VERWENDET WERDEN
+  //------------ TASK_4 3 LINIE FAHREN GYROSKOP GESTÃœTZT-------------------- //
+  //ALLGEMIN KÃ–NNTE FÃœR DIE ACCELERATION REGELUNG EIN PID REGLER VERWENDET WERDEN
  
 
   const int BASE_MOTOR_SPEED = 100; //BASIS SPEED
   const float CONTROL_ATTACK_MULTIPLIER = 10.0f;
-  const float TARGET_ACCELERATION =0.5f; //WAS SOLL DIE ANGEPEILTE ACCELERATION SEIN -> 0.5 enspricht ungefährt dem Motorspeed von 100 wurde experimentell bestimmt
+  const float TARGET_ACCELERATION =0.5f; //WAS SOLL DIE ANGEPEILTE ACCELERATION SEIN -> 0.5 enspricht ungefÃ¤hrt dem Motorspeed von 100 wurde experimentell bestimmt
   float current_acceel_multiplier = 1.0f;
   for (;;) {
 
