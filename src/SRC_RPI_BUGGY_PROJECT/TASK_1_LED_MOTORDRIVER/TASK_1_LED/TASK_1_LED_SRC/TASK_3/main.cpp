@@ -1,4 +1,4 @@
-// Einführung Embedded Software - SS2020 - 55646
+// EinfÃ¼hrung Embedded Software - SS2020 - 55646
 //ProjektPhase Buggy - Gruppe G
 //Marcel Ochsendorf 11.06.2020
 //marcelochsendorf.com
@@ -45,6 +45,7 @@ UltrasonicDriver ultraschall;
 /// Interrupt Routine for STRG-C
 void signalHandler(int signum)
 {
+  motors.drive_stop();
   std::cout << "Strg-C Programmende" << std::endl;
   exit(signum);
 }
@@ -86,7 +87,7 @@ int main()
 
 
   
-  //motors.drive_stop();
+  motors.drive_stop();
 
 
   return 0;
