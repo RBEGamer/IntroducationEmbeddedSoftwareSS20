@@ -1,0 +1,18 @@
+-- LED NOTIZEN --
+
+Zeit: Programmierung + Schaltplan + Aufbau ca 15min
+
+
+Es wurden 2 weisse leds auf das Steckbrett gesteckt.
+Led
+
+Die leds haben eine Durchlasspannung von 1.2v und ca 20ma strom, dies ergibt einen wiederstand von ca 105Ohm der nächste passende Wert der bei dem Set dabei lag sind 100Ohm.
+
+Somit wurde die LED für einen Vorwiederstand von 100Ohm mit dem PIN29 auf dem Motorhat verbunden. Der andere Pin wurde mit GND verbunden.
+
+Das gleiche wurde mit der zweiten LED gemacht welche sich auf der anderen seite des STeckbretts befindet. Diese wurde jedoch an Pin 28 verbunden.
+
+Das Programm lässt die zwei LED unterschiedliche blinken bis das Programm per singal beendet wird
+
+
+Der g++ compiler muss mit der option -lwiringpi gestartet werden, damit die WiringPi Bibliothek eingebunden wird. Mehr ist nicht erforderlich, da die WiringPi lib bereits auf dem System installiert war

@@ -1,0 +1,88 @@
+﻿  Quellen werden überprüft.
+  Quellen werden remote nach "192.168.178.83" kopiert.
+  Die Architektur wird überprüft.
+  Die Architektur wird überprüft.
+  Remotebuild wird gestartet.
+  Quellen werden kompiliert:
+  CompassDriver.cpp
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(64,34): warning : conversion from ‘int’ to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(64,34): warning :          high_byte = read_register( _addr);
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(64,34): warning :                      ~~~~~~~~~~~~~^~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(65,33): warning : conversion from ‘int’ to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(65,33): warning :          low_byte = read_register( _addr + 1);
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(65,33): warning :                     ~~~~~~~~~~~~~^~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(66,34): warning : conversion from ‘int’ to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(66,34): warning :          value = (high_byte << 8) | low_byte;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(66,34): warning :                  ~~~~~~~~~~~~~~~~~^~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(99,33): warning : conversion from ‘__gnu_cxx::__promote_2<short int, short int, double, double>::__type’ {aka ‘double’} to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(102,21): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(102,21): warning :              heading += 2.0*M_PI;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(102,21): warning :                      ^
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(104,21): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(104,21): warning :              heading -= 2.0 * M_PI;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(104,21): warning :                      ^
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(106,38): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(106,38): warning :         _s.heading =  heading * 180.0 / M_PI;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(106,38): warning :                                       ^
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(119,39): warning : comparison of integer expressions of different signedness: ‘std::queue<CompassDriver::readrawresult>::size_type’ {aka ‘unsigned int’} and ‘const int’ [-Wsign-compare]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(119,39): warning :          if (smooth_value_queue.size() > SMOOTH_VALUE_QUEUE_MAX_ENTRIES) {
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(119,39): warning :              ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(127,39): warning : comparison of integer expressions of different signedness: ‘std::queue<CompassDriver::readrawresult>::size_type’ {aka ‘unsigned int’} and ‘int’ [-Wsign-compare]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(127,39): warning :          if (smooth_value_queue.size() >= SMOOTH_VALUE_QUEUE_MAX_ENTRIES-1) {
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(127,39): warning :              ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(140,23): warning : conversion from ‘int’ to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(140,23): warning :              tmp_res.x += q_element.x;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(140,23): warning :              ~~~~~~~~~~^~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(141,23): warning : conversion from ‘int’ to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(141,23): warning :              tmp_res.y += q_element.y;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(141,23): warning :              ~~~~~~~~~~^~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(142,23): warning : conversion from ‘int’ to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(142,23): warning :              tmp_res.z += q_element.z;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(142,23): warning :              ~~~~~~~~~~^~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(150,46): warning : conversion from ‘std::queue<CompassDriver::readrawresult>::size_type’ {aka ‘unsigned int’} to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(150,46): warning :          tmp_res.x /= smooth_value_queue.size();
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(150,46): warning :                                               ^
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(151,46): warning : conversion from ‘std::queue<CompassDriver::readrawresult>::size_type’ {aka ‘unsigned int’} to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(151,46): warning :          tmp_res.y /= smooth_value_queue.size();
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(151,46): warning :                                               ^
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(152,46): warning : conversion from ‘std::queue<CompassDriver::readrawresult>::size_type’ {aka ‘unsigned int’} to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(152,46): warning :          tmp_res.z /= smooth_value_queue.size();
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(152,46): warning :                                               ^
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(93,5): warning : control reaches end of non-void function [-Wreturn-type]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(93,5): warning :      }
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\CompassDriver.cpp(93,5): warning :      ^
+  GyroscopeDriver.cpp
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(60,21): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(60,21): warning :      tmp_res.ax = ax / 16384.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(60,21): warning :                   ~~~^~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(61,21): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(61,21): warning :      tmp_res.ay = ay / 16384.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(61,21): warning :                   ~~~^~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(62,21): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(62,21): warning :      tmp_res.az = az / 16384.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(62,21): warning :                   ~~~^~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(64,21): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(64,21): warning :      tmp_res.gx = gx / 131.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(64,21): warning :                   ~~~^~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(65,21): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(65,21): warning :      tmp_res.gy = gy / 131.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(65,21): warning :                   ~~~^~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(66,21): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(66,21): warning :      tmp_res.gz = gz / 131.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(66,21): warning :                   ~~~^~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(85,36): warning : conversion from ‘int’ to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(85,36): warning :      high_byte = wiringPiI2CReadReg8(i2c_file_handle, _addr);
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(85,36): warning :                  ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(86,35): warning : conversion from ‘int’ to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(86,35): warning :      low_byte = wiringPiI2CReadReg8(i2c_file_handle, _addr + 1);
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(86,35): warning :                 ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(87,30): warning : conversion from ‘int’ to ‘short int’ may change value [-Wconversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(87,30): warning :      value = (high_byte << 8) | low_byte;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(87,30): warning :              ~~~~~~~~~~~~~~~~~^~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(41,1): warning : control reaches end of non-void function [-Wreturn-type]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(41,1): warning :  }
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\GyroscopeDriver.cpp(41,1): warning :  ^
+  main.cpp
+  Objekte werden verknüpft.
+  TASK_3.vcxproj -> C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\bin\ARM\Debug\TASK_3.out
+  "gpio export 17 out" wird aufgerufen, Arbeitsverzeichnis: /home/pi/projects/TASK_3/

@@ -1,0 +1,54 @@
+--- GYROSKOPE AUFBAU ---
+!! Vieles bei der Programmierung/Aufbau ist identisch zum Kompass. Trotzdem wurden alle Schritte noch einmal aufgenommen, damit die Kompass-Aufgabe nicht vorraus gesetzt werden muss !!
+DATASHEET: https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Register-Map1.pdf
+
+
+
+
+-- SOFTWARE ---
+
+Zur Konfiguration werden wie bei dem Kompass-Sensor einige Register verwendet. Da der Buggy in Normalfall keinen grossen Kräften ausgesetzt ist, reichen in den meisten Fällen die Default-Werte wie beim Kompass-Sensor.
+
+
+Nach der Initialisierung der Wiring-PI-I2C Lib über die init()-Funktion der Library, werden die Konfigurations-Register setzt.
+Dabei sind folgende Register wichtig:
+* PowerManagement (PWR_MGMT_1), Adresse 0x6B welches mit dem Wert 0x01 in den aus dem Stanby in dem Kontinuierlichen-Modus gesetzt wird.
+* Gyroscope-Konfig (GYRO_CONFIG), 0x1B welches mit dem Wert 0x00 auf eine Empfindlichkeit von 250°/s gesetzt wird.
+* Sample-Rate (SMPLRT_DIV), 0x19, welches mit dem Wert 0x07 auf 8kHz gesetzt wurde. Die Sampling-Rate vom Accelerometer ist immer 1kHz und kann nicht geändert werden-
+
+
+Nach der Konfiguration, können die Sensorwerte gelsen werden.
+Das der MPU6050  nicht nur ein Gyroscope enthält, sondern auch ein Acceleromater, werden im Treiber 12 (8-bit) Register gelsen.
+Da die WiringPI-I2C-Library mit der Funktion readRegister16(_start_adresse) auch direkt 16Bit-Register lesen kann und diese direkt zu einem short_16t umwandelt, brauchen wir nur 6 Register lesen.
+Dies Funtioniert, da die Register LOW/HIGH direkt hinterneinander liegen, muss die Start-Adresse auf das jeweilige HIGH gelegt werden.
+
+* ACCELEROMATER_X_HIGH 0x3B
+* ACCELEROMATER_Y_HIGH 0x3D
+* ACCELEROMATER_Z_HIGH 0x3F
+
+* GYROSCOPE_X_HIGH 0x43
+* GYROSCOPE_Y_HIGH 0x45
+* GYROSCOPE_Z_HIGH 0x47
+
+
+Nach dem Lesen dieser Register, werden die Werte noch Skaliert. Dies muss geschehen, da je nach gewählter Auflösung die gelesene Werte nicht mit den realen übereinstimmen.
+Die Skaliertung kann man dem Datenblatt übernehmen. In userem Fall (s. Datenblatt S.31) ist unsere Sensitivity auf +-250°/s gesetzt also müssen die Werte durch 131.0 geteilt werden.
+
+
+
+
+
+---- PRGRAMM ----
+
+Da es wie in TASK_3 beschrieben Probleme mit dem Kompass-Modul gab, wurde die Aufgabenstellung aus TASK_3 "Rechteck-Fahren" umgesetzt.
+
+Bei dem Gyroscope bekommen wir keine absoluten Werte, wie beim Heading des Kompass. Hier wird die relative Winkeländerung pro Zeitinterval ausgegeben (letzen gelesen Wert).
+Deshalb müssen die Werte integriert werden um einen "absoluten"-Wert zu erhalten. 
+
+Dazu wird der aktuell gemesene Wert immer aufaddiert und durch die gebrauchte Zeit (dem delay(10) in der for-Loop) multipliziert.
+
+Auch mit 10ms Zykluszeit ist die erechnete Gradzahl sehr akkurat.
+Im Test mit einer Drehnung (Motorspeed 75 für den linken Motor) und dem  Ziel-Grad von 90°, hatte der Buggy eine Genauigkeit von 98% in 10 Versuchen.
+
+Dies Spiegelt sich auf im Programm für die Geradeausfahrt wieder. Hier hält der Buggy seine Linie sehr genau, wie bei den Videos zu erkennen ist.
+Die Regelung ist dabei stark eingestellt, sodass der Kompass die Motoren +-15 Geschwindigkeitseinheiten nachregeln kann.

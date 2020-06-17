@@ -1,0 +1,11 @@
+-- RECHTECK NOTIZEN --
+
+Zeit: Programmierung ca 15Minuten
+
+Hier wurde das Programm "GERADEAUS_TEST" abgeändert. 
+Es wurden Funktionen erstellt damit der Roboter sich auf der stelle drehen kann.
+Dies geht indem man den einen Motor nach rechts drehen lässt und den anderen nach Links.
+
+Da hier noch ein Feedback (zb Kompass) die Überwachung der Drehung übernimmt, kann die Drehung nur über die Zeit gesteuert werden. Dies wurde experimentell bestimmt für eine Geschwindigkeit von 100.
+
+Man sieht deutlich dass der Startpunkt nicht erreicht wird nach Beendigung der Rechtsecks.

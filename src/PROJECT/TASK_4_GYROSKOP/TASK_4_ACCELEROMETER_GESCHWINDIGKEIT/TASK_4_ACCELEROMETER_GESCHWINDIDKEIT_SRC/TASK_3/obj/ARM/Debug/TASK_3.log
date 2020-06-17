@@ -1,0 +1,26 @@
+﻿  Quellen werden überprüft.
+  Quellen werden remote nach "192.168.178.83" kopiert.
+  Die Architektur wird überprüft.
+  Die Architektur wird überprüft.
+  Remotebuild wird gestartet.
+  Quellen werden kompiliert:
+  main.cpp
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(73,34): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(73,34): warning :          current_gyroscope_degree += gyres.gz * TimeElapsed_s_us;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(73,34): warning :          ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(128,42): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(131,37): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(131,37): warning :            current_acceel_multiplier -= 0.1;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(131,37): warning :            ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(135,37): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(135,37): warning :            current_acceel_multiplier += 0.1;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(135,37): warning :            ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(142,56): warning : conversion from ‘float’ to ‘int’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(142,56): warning :        motors.set_motor_speed(current_acceel_multiplier *(BASE_MOTOR_SPEED - curr_degree * CONTROL_ATTACK_MULTIPLIER), current_acceel_multiplier*(BASE_MOTOR_SPEED + curr_degree * CONTROL_ATTACK_MULTIPLIER));
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(142,56): warning :                               ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(142,144): warning : conversion from ‘float’ to ‘int’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(142,144): warning :        motors.set_motor_speed(current_acceel_multiplier *(BASE_MOTOR_SPEED - curr_degree * CONTROL_ATTACK_MULTIPLIER), current_acceel_multiplier*(BASE_MOTOR_SPEED + curr_degree * CONTROL_ATTACK_MULTIPLIER));
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(142,144): warning :                                                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Objekte werden verknüpft.
+  TASK_3.vcxproj -> C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\bin\ARM\Debug\TASK_3.out
+  "gpio export 17 out" wird aufgerufen, Arbeitsverzeichnis: /home/pi/projects/TASK_3/

@@ -1,0 +1,116 @@
+--- KOMPASS AUFBAU ---
+
+
+--- SCHEMATATIC ---
+
+PINS AM SENSOR
+*  SCL -> SCL
+* SDA -> SDA
+* GND -> GND
+* vCC -> 3V3
+
+Pull-UP Wiederstände für die beiden I2C SDA, SCL Leitungen sind nicht notwendig. Da diese bereits auf dem Breakoutboard des Sensors aufgelötet sind. Sonst wären, je nach Leitungslänge und Kapazität 4k7Ohm PullUp Wiederstände für einen kurze Buslängen notwenig.
+
+
+--- INSTALLATION i2ctools
+Damit nach i2c devices gescannt werden kann, müssen die i2c tools installiert werden.
+Dazu müssen in einer ssh console folgende befehle zur installation eingegeben werden
+
+'$ sudo apt update			# paketquellen updaten'
+'$ sudo apt install i2c-tools -y   # I2C-Toolkit fuer die Kommandozeile'
+
+
+Nachdem kann man mit dem Befehl  i2cdetect -y 1 die erste I2C Schnittstelle des PI Scannen.
+In der tabelle (s. Screenshot i2cdetect.png) sieht man, dass mehrere Geräte gefunden wurden. Zum einen das Motorshield und den QMC5883L mit der Adresse 0x0D, welche die Default-Adresse ist welche im Datenblatt angegeben ist.
+
+Somit wurde der Sensor korrekt angeschlossen.
+
+
+-- SOFTWARE ---
+
+Um I2c mit der WiringPi Bibliothek  verwenden zu können, ist zusätzlich zu #include "wiringpi.h" auch #include <wiringPiI2C.h> notwendig.
+Damit sehen wiringPiI2CSetup,wiringPiI2CRead und wiringPiI2CWrite zur Verfügung.
+
+Es werden 3 Register zur Konfiguration benötigt. Die kann man auf eines Reduzieren, wenn man alle anderen Einstellungen auf den default werten lässt.
+Das wichtigste Config-Register ist das REGISTER_CONTROL_1 bei 0x09, die enthält den Modus des Sensors.
+Es gibt den Standby-Modus und den Coninuierlichen-Modus.
+* Standby-Modus -> schickt den sensor schlafen, keine Messungen
+* Coninuierlichen-Modus ->sensor misst durchgehend
+
+Des Weiteren ist es noch möglich, die Empfindlichkeit (GAIN 2G oder 8G) einzustellen. (8G bei starken magnetischen Signalen) und die Samplerate (10hz, 50hz, 100hz, 200hz), hier wird ebenfalls der der Defaultwert genommen (10hz).
+
+
+Der Gain wurde auf 8G gestellt, damit der Sensor nicht in den OVERLFOW-Modus versetzt wird, wenn die Magnetischen Felder grösser als 2G werden.
+Dies reduziert zwar die Genauigkeit, aber der Sensor muss nicht erneut Konfiguriert werden, wenn es zu dem Feldern >2G kommt.
+
+
+Nach der Konfiguration des Sensors, kann über das Statusregister abgefragt werden, ob eine Messung abgeschlossen ist und die Werte gelesen werden können.
+Dies geschieht im Status-Register bei Adresse 0x06 und das erste Bit (STAT_DRDY) ist gesetzt, wenn eine Messung abgeschlossen ist.
+
+
+
+!!!! Um nun die Werte auslesen zu können, müssen!! alle 6 Register für X,Y,Z gelesen werden, da sonst keine neue Messung durchgeführt wird !!!!
+Für jede Komponente (x,y,z) wird das HIGH-Byte und das LOW-Byte gelsen und zu einem int16_t Wert zusammengesetzt,
+Die geschieht mittels shift um 8 stellen 
+
+int result =(LSB | MSB<<8)
+
+
+
+Dieses Auslesen wurde in der Funktion  readrawresult QMC5883L::readRaw(){ implementiert und gibt ein Struct "readrawresult" zurück, in dem die x,y,z Komponenten abgelegt werden. Zusätzlich ein result_valid flag welches Anzeigt ob das lesen erfolgreich war.
+
+
+
+
+
+
+
+
+---- PROBLEME I2C READ ----
+Wenn nicht alle Werte direkt mit einem Call aus dem Sensor gelesen werden (also 6bytes für. xyz) geht der sensor in den DATA_SKIPPED_READ State.
+Dieser ist führt dazu, dass der sensor in einen teilweise STOP_STATE geht.
+
+
+
+In Foren habe gelesen, dass einige Probleme beim Auslesen der XYZ Register haben, wenn dies nicht in einer I2C-Transaction geschieht.
+ 
+Um dies zu Testen, habe ich über den I2C-File-Handle und die nativen Linux-File-Funktionen verwendet (ioctl,read).
+Damit konnte ich die Daten (6 Register) komplett auslesen, diese deckten sich aber mit den Werten aus der WiringPi.
+ 
+Zur Kontrolle habe ich den Sensor über Python (https://github.com/RigacciOrg/py-qmc5883l) ausgelesen. Dort wurde entweder X:0,Y:0,Z:0  ausgelesen oder Werte die sich von der Größenordnung mit meinen Deckten.
+
+
+
+Auch sind die Werte sehr instabil, deswegen wurde ein Mittelwert aus den letzten 20 Werten gebildet (funktion QMC5883L::smmoth_value).
+Mit den gemittelten Werten kann nun das Heading ausgerechnet werden.
+
+
+
+
+Um jetzt das Heading auszurechen ist zum einen die Funktion std::atan2(y,x) und die Konstante PI notwenig.
+Auch ist der declination Wert notwendig, dieser ist die Winkelabweichung zum Realen Norden, dieser Wert ist jenachdem wo man sich auf der Erde befindet anders. Es gibt Tabellen, in den man schauen kann, für welchen Ort welcher declination  Wert gilt.
+Da es in diesem Fall nicht wichtig ist genau zu wissen, wo der Echte-Norden ist, wurde dieser hier in der Berechnung weggelassen.
+
+GRAFIK DAZU
+https://en.wikipedia.org/wiki/Magnetic_declination#/media/File:Magnetic_declination.svg
+
+
+
+
+
+
+---- PROBLEME MAGNETISCHE INTERFERENZ ----
+Auch mit den gemittelten Werten, war das Ergebnis sehr durchwachsen, was eine wirklich Regelung der Motoren sehr schwer machte.
+Die Motoren mussten vor der ersten Messung bereits laufen, da sonst der gemessene Winkel nach anschalten der Motoren sehr stark von dem Winkel ohne laufende Motoren abwich.
+
+Im Code wird deswegen der Sensor erst gestartet nachdem die Motoren bereits 10 Sekunden laufen. Auch das einstellen der Sensor-Empfindlichkeit auf 8G (Standart sind 2G) beeinflusste das Rauschen der Messungen kaum.
+
+Beim Testen mit anderen Elektischen-Geräten in der Umgebung (Schaltnetzteilen, AC-Motoren) brachte die Messungen um mehrere 10Grad zusätzlich zum oben genannten Rauschen durcheinander.
+
+In verschiedenen Foren, habe ich gelesen, dass viele solch ein starkes Rauschen und Driften bei ihren Modulen haben. Zusätzlich zum QMC5883L gibt es noch den Nachbau HMC5883L, welche vom Board her identisch sind, sich aber von den XYZ Registern unterscheiden (Startpostion 0x06 anstatt 0x00).
+
+Auch habe ich überprüft ob es sich wirklich um den QMC5883L handelt und nicht um den Nachbau HMC5883l, dazu habe ich die Chip-Identifier Register ausgelesen und der Wert aus dem Datenblatt (0xFF) spiegelt sich dort wieder.
+
+
+
+

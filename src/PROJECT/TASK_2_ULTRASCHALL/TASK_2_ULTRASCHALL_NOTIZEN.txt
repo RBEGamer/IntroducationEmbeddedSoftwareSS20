@@ -1,0 +1,85 @@
+--- ULTRASCHALL AUFBAU ---
+
+PINS AM SENSOR
+*  VCC; positive Versorgungsspannung -> 5V
+* TRIG; lösst bei Flankenwechsel einen Ultraschallimpuls aus -> wird vom RPI getriggert
+* ECHO; empgangener Impuls
+* GND; Masse
+
+
+--- SCHEMATATIC ---
+
+Da der Sensor eine Versorgungspannung von 5V benötigt und daher sein die TRIG und ECHO Pins ebenfalls auf dem 5V Level laufen, müssen die in das am Pi durch einen Spannungsteiler geschützt werden.
+
+Da der TRIG in ein Eingangs-Pin des Sensors ist, benötigt dieser keinen Spannungsteiler.
+Das 3.3V Level das bei einem geschalteten Pin am RPI anliegt; reicht diese aus  damit der Sensor ein HIGH an seinem TRIG Pin erkennt.
+Laut Datenblatt des Sensors, wird an dem TRIG in ein HIGH erkannt wenn der Pegel über 0.5*VCC liegt (somit 2.5V bei 5V).
+
+
+Anders verhält es sich beim ECHO Pin des Sensors. Dieser ist ein Ausgang und muss mit einem Eingangs GPIO des RPIs verbunden werden. Da die RPI GPIOs max 3.3V LogicLevel tolerant sind, muss hier der Spannungsteiler, bestehend aus zwei Wiederständen eingebracht werden.
+
+
+an ECHO wird der 3.9kΩ Widerstand angeschlossen.  An dessen Ende geht eine Verbindung zu Pin 18  und über den 470Ω Widerstand eine Verbindung zu GND.
+
+
+Der TRIG Pin wurde an PIN 24 des RPIs angeschlossen.
+
+
+FORMEL ZUR WIEDERSTANDSBERECHNUNG
+
+(5V * 6,8kΩ)/(3,9kΩ + 6,8kΩ) =  3,18V
+Eingang ist 5V mit den Verwendeten Wiederständen ergibt sich also eine Ausgangsspannung von max 3.2V bei 5V Eingangsspannung.
+
+
+--- DISTANZBERECHNUNG ---
+Da die Ultraschallwellen wie normale hörbare Frequenzen im Raum bewegen, bewegen sie sich mit ca. 34300cm/s.
+Die Schallgeschwindigkeit ist je nach Raumtemperatur und Luftfeuchte anders und muss gegebenenfalls angepasst werden.
+
+
+Für die Distanz benötigen wir nur die Zeit zwischen dem Triggern des TRIG Pins und dem ankommenden Echo am ECHO Pin.
+
+distanz = 34400*ZEIT
+
+Da das erzeugte Echo am Objekt reflektiert wird. (SENSOR -> OBJECT -> SENSOR), muss die Strecke noch durch zwei geteilt werden.
+Somit ist die Formel zur Distanzbrechnung:
+'distanz = (TimeElapsed_s * 34300*0.5)'
+
+--- PRGRAMM ---
+#### SRC_ABSTANDSMESSUNG_AUSGABE _UND_LED ####
+gibt die gemessene Distanz aus und lässt die Leds ab einer Distanz von 20cm leuchten.
+
+Die Distanz kann allgemein bei langsamen Geschwindigkeiten kurz sein, da der Rover sich sehr langsam bewegt. Testen hat gezeigt dass bei einer eingestellten Geschwindigkeit von 80 (für beide Motoren = Vorwärts) eine Distanz von 15cm git als Notbremsung eignet.
+
+Eine weiter Modifikation, wäre eine Bestimmung des minimalen Abstands der zur Notbremsung nötig ist über die Geschwindigkeit. Je höher die Geschwindigkeit desto länger muss auch der Bremsweg sein.
+Dies wurde mit der Funktion calculate_minimal_emergency_breaking_distance umgesetzt.
+Diese 
+
+
+##### SRC_SLALOM_OBSTACLE_DETECTION ####
+hier wurde die drive_sinewave() funktion so angepasst, dass sie nach jedem Schritt die avoid_obstacle funktion aufruft.
+Hier wird dann ein Rechteckmuster, wie bei der vorherigen Aufgabe gefahren, um dem Objekt auszuweichen.
+
+
+
+
+
+
+
+--- KONTROLLE ---
+
+Zum testen der Signale wurde ein DSO an den TRIG und ECHO Pin des Sensors angeschlossen.
+Ein Objekt wurde mit einem definierten Abstand (10cm) zum Sensor platziert. 
+Mittels der Cursor-Funktion des DSO wurde die Zeit zwischen Trigger und Echo gemessen.
+Diese decken sich mit der vom RPI gemessenen delta Zeit. (s. Screenshot)
+
+--- DISZANZMESSUNGEN TOLERANZEN -----
+Testaufbau s. Bilder
+OBJEKT ENTFERNUNG ---------- GEMESSENE ENTFERNUNG
+12cm ---------- 12,6 cm
+18cm ---------- 20.2 cm
+
+Resultat:
+Die Störempfindlichkeit des Sensor nimmt stark zu je unebener das Objekt ist. Bei test mit einem Buch sind weichen die Ergebnisse nur um ca 10% ab.
+Bei runden Objekten die getestet wurden (IKEA Gläser) wichen die Werte bis zu 2cm je nach entfernung von den Gemessenen ab.
+Dies ist zu erklären, da das aktustische Echo, nicht ideal reflektiert wird. 
+Die Tests haben auch ergeben, dass sich der Sensor parallel zum Objekt befinden muss, da sonst das Echo nicht korrekt refelktiert wird.

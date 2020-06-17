@@ -1,0 +1,61 @@
+-- AUFBAU --
+
+
+Der Aufbau gestaltete sich durch die Anletiung sehr einfach.
+
+aufbau grundgerüst ca 15minuten, sehr einfach...
+
+mofikationen:
+
+Powerbank wurde mit Klettband am Chassis festgemacht
+
+Die ordiginale halteplatte für den RPI wurde gegen eine selber aus 3mm acryl gelaserter ausgetausch. Diese wird nun mit 4 abstandshaltern auf dem chassis montiert (vorher nur 2).
+
+Desweiteren wurde alle bei dem set beiliegenden Abstandshalter gegen neue M3-Nylon Abstandshalter getauscht. Diese erhöhen die Stabilität und das Motorhat wird nun durch vier punkte auf dem PI gehalten anstatt nur zwei wie bei der Anleitung.
+
+
+Zeit für die Modifikationen ca 20Minuten inkl design/lasern der neuen Platte und tauschen der Abstandshalter.
+
+
+
+
+
+---- EINRICHTIUNG PROGRAMMIERUMGEBUNG LINUX ----
+IDE: Visual Studio Code
+PLUGINS:
+
+* C++ Intellisese
+* Remote-SSH zum Verbinden/automatisches File-Sync mit dem PI
+* vGDB als GDB-Debugger
+
+makefile geschrieben, 
+
+
+
+---- REMOTE FREIGABE DES RPI----
+Für das das
+ Prozedere muss der Lokale-SSH-Schlüssen auf dem PI hinzugefügt werden.
+Dies kann per '$ ssh-copy-id pi@y<IP_RPI>' gemacht werden und muss mit dem Passwort des Buggys bestätigt werden.
+
+Um einen Reverse-SHH Tunnel zu erzeugen, ist ein Server mit einer statischen IP Notwenig, diesen bekommt man bereits ab 1€ bei verschiedenen Anbietern. In unserem Fall wurde eine bereit vorhandene AWS EC2 Instanz genutzt.
+Dort muss über das die AWS-Management Konsole ein Port für die spätere SSH Verbindung geöffnet werden. Da Port 22 (SSH Default-Port) berets von der Instanz selber verwendet wird, wurde Port 2222 fregegeben.
+
+
+
+
+Damit der RPI jetzt seine SSH-Dienst über den Remote Server  (Instanz) freigibt, wird beim SSH-Kommando das -R Flag verwendet.
+Im Falle eines Verlusts der SSH Verbindung (durch zB Timeout), kann die Verbindung automatisch wiederhergestellt werden.
+Ein oft genutztes Tool dafür ist autossh.
+
+Installation von autossh:
+'$ sudo apt install autossh -y'
+Dieses autossh führ nach einer Fehlermeldung, das übergebene SSH-Kommando erneut aus.
+
+Der komplette Befehl sieht nun so aus:
+'$ autossh -M 9999 -N -R *:2222:localhost:22 <REMOTE_SERVER_USER>@<REMOTE_SERVER_IP>'
+ 
+
+VERBINDUNG ÜBER TUNNEL:
+'$ ssh -p 2222 pi@<REMOTE_SERVER_IP>'
+
+Nun kann hat man eine ganz normale SSH-Verbinung mit vollem Zugriff auf den RPI inkl SFTP. 

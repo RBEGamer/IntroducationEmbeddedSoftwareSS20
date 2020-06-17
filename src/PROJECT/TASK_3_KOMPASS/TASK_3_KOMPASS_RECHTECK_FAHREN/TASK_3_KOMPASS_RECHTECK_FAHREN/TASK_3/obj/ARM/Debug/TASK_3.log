@@ -1,0 +1,37 @@
+﻿  Quellen werden überprüft.
+  Quellen werden remote nach "192.168.178.83" kopiert.
+  Die Architektur wird überprüft.
+  Die Architektur wird überprüft.
+  Remotebuild wird gestartet.
+  Quellen werden kompiliert:
+  main.cpp
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(125,64): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(125,64): warning :        float destination_degree = degree_startpunkt_der_drehung + 90.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(125,64): warning :                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(130,30): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(130,30): warning :            destination_degree += 360.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(130,30): warning :            ~~~~~~~~~~~~~~~~~~~^~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(103,8): warning : unused variable ‘did_first_time_reading’ [-Wunused-variable]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(103,8): warning :    bool did_first_time_reading = false;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(103,8): warning :         ^~~~~~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(104,9): warning : unused variable ‘first_time_reading’ [-Wunused-variable]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(104,9): warning :    float first_time_reading = 0.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(104,9): warning :          ^~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(106,15): warning : unused variable ‘MAX_DEGREE_OFFSET’ [-Wunused-variable]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(106,15): warning :    const float MAX_DEGREE_OFFSET = 0.5f;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(106,15): warning :                ^~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(107,13): warning : unused variable ‘correction_multipliert’ [-Wunused-variable]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(107,13): warning :    const int correction_multipliert = 10.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(107,13): warning :              ^~~~~~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(108,13): warning : unused variable ‘MAX_CORRECTION_MULTIPLIER’ [-Wunused-variable]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(108,13): warning :    const int MAX_CORRECTION_MULTIPLIER = 20.0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(108,13): warning :              ^~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(109,13): warning : unused variable ‘basespeed’ [-Wunused-variable]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(109,13): warning :    const int basespeed = 100;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(109,13): warning :              ^~~~~~~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(110,7): warning : unused variable ‘c’ [-Wunused-variable]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(110,7): warning :    int c = 0;
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(110,7): warning :        ^
+  Objekte werden verknüpft.
+  TASK_3.vcxproj -> C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\bin\ARM\Debug\TASK_3.out
+  "gpio export 17 out" wird aufgerufen, Arbeitsverzeichnis: /home/pi/projects/TASK_3/

@@ -1,0 +1,9 @@
+-- SLALOM --
+
+hier wurde der Roboter so programmiert dass er eine Sinuskurve abfährt; dazu wurde die <math.h> verwendet um die std::sin funktion verwenden zu können.
+
+Damit der Roboter beim nulldurchgang des sinus nicht stehenbleibt, wurde eine minimale gewischwinigkeit vorgegeben und ein weiterer geschwindikeitswert * sinuns-wert hinzugefügt.
+
+Dabei wird der sinus-wert bei der anderen motorachse subtrahiert damit eine drehung erfolgt
+
+bearbeitungsdauer ca 20minuten mit testen und aufbau der teststrecke

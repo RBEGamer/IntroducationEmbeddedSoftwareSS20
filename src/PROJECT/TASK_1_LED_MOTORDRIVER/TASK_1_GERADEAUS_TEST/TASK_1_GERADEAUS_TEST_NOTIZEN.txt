@@ -1,0 +1,22 @@
+-- GERADEAUS NOTIZEN --
+
+Zeit: Programmierung ca 20Minuten (10Minuten Programm + 10Minuten erstellung Makefile)
+
+
+
+Um die zwei Motoren ansteuern zu können wurde die <adafruitmotorhat.h> verwendet.
+
+
+mit "$ make" wird das Programm gebaut
+
+
+Bei dem Programm wurden Abwandlungen gegenüber der Beispiele vorgenmommen:
+
+std::shared_ptr<AdafruitDCMotor> motor_left = nullptr; wurden als globale benutzt damit man im programm überall die möglichkeit hat die motoren zu steuern.
+Dies ist vorallem für das beenden des Programms per singal (sstrg+c) notwendig, damit diese gestoppt werden können.
+
+
+Der Buggy fährt ab einer gesetzten Geschwindigkeit von 70 los.
+ "motor_right->setSpeed(70);"
+
+Bei Werten unter 70 hört man die Ansteuerung des Motors aber er hat nicht genug kraft, den buggy zu bewegen.

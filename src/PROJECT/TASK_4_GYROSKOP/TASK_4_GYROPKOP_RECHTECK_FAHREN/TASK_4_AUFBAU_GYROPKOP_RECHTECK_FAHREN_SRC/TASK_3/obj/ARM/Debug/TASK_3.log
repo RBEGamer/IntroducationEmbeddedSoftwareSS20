@@ -1,0 +1,19 @@
+﻿  Quellen werden überprüft.
+  Quellen werden remote nach "192.168.178.83" kopiert.
+  Die Architektur wird überprüft.
+  Die Architektur wird überprüft.
+  Remotebuild wird gestartet.
+  Quellen werden kompiliert:
+  main.cpp
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(82,41): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(82,41): warning :      _degree = _degree * (M_PI / 180.0)*2*0.8; // 0.8 IST DER ERMITTELTE KORREKTURFAKTOR BASIEREND AUF DEM 10ms DELAY
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(82,41): warning :                ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(105,9): warning : conversion from ‘double’ to ‘unsigned int’ changes value from ‘1.0000000000000001e-1’ to ‘0’ [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(105,9): warning :    delay(0.1); //sleep .1ms
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(105,9): warning :          ^~~
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(121,25): warning : conversion from ‘double’ to ‘float’ may change value [-Wfloat-conversion]
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(121,25): warning :  float distanz = (17015.0*TimeElapsed_s_us); // 34400 is the speed of sound in cm/s; div by 2 = 17015
+C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\main.cpp(121,25): warning :                  ~~~~~~~~^~~~~~~~~~~~~~~~~~
+  Objekte werden verknüpft.
+  TASK_3.vcxproj -> C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\bin\ARM\Debug\TASK_3.out
+  "gpio export 17 out" wird aufgerufen, Arbeitsverzeichnis: /home/pi/projects/TASK_3/

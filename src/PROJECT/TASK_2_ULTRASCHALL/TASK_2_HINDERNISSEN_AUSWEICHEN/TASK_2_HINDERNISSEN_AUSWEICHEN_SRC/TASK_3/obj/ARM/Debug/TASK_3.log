@@ -1,0 +1,10 @@
+﻿  Quellen werden überprüft.
+  Quellen werden remote nach "192.168.178.83" kopiert.
+  Die Architektur wird überprüft.
+  Die Architektur wird überprüft.
+  Remotebuild wird gestartet.
+  Quellen werden kompiliert:
+  main.cpp
+  Objekte werden verknüpft.
+  TASK_3.vcxproj -> C:\Users\admin\source\repos\TASK_3_COMPASS_DRIVER_PRINT\TASK_3\bin\ARM\Debug\TASK_3.out
+  "gpio export 17 out" wird aufgerufen, Arbeitsverzeichnis: /home/pi/projects/TASK_3/
