@@ -1,4 +1,4 @@
-// Einführung Embedded Software - SS2020 - 55646
+// EinfÃ¼hrung Embedded Software - SS2020 - 55646
 //ProjektPhase Buggy - Gruppe G
 //Marcel Ochsendorf 11.06.2020
 //marcelochsendorf.com
@@ -45,8 +45,9 @@ UltrasonicDriver ultraschall;
 /// Interrupt Routine for STRG-C
 void signalHandler(int signum)
 {
-  std::cout << "Strg-C Programmende" << std::endl;
-  exit(signum);
+	motors.drive_stop();
+  	std::cout << "Strg-C Programmende" << std::endl;
+  	exit(signum);
 }
 
 
@@ -81,8 +82,8 @@ int main()
 
   //------------ TASK_1 3 SLALOM --------------------- //
   // HIER WURDE ALS KURVE EINE SINUSWELLE PROGRAMMIERT
-  //DIE GEGENSTÄNDE STEHEN WIE IM VIDEO IN EINER VERSCHOBENEN SINUSWELLE, SODASS DER ROBOTER DIESE UMFÄHRT
-  //!!! ACHTUNG : BENÖTIGIT VIEL GERADE FLÄCHE !!!
+  //DIE GEGENSTÃ„NDE STEHEN WIE IM VIDEO IN EINER VERSCHOBENEN SINUSWELLE, SODASS DER ROBOTER DIESE UMFÃ„HRT
+  //!!! ACHTUNG : BENÃ–TIGIT VIEL GERADE FLÃ„CHE !!!
   //FAHREN 5 VOLLE SINUSWELLEN AB
   for (int i = 0; i < 360 * 5; i++) {
 	  motors.drive_sine_wave_step(70, 40); //70 ist die Geschwindikeit und 40 die Amplitude der Sinuswelle
