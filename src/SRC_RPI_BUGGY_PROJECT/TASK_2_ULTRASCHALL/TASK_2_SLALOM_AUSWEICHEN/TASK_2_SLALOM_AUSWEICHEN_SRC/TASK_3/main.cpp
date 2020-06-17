@@ -1,4 +1,4 @@
-// Einführung Embedded Software - SS2020 - 55646
+// EinfÃ¼hrung Embedded Software - SS2020 - 55646
 //ProjektPhase Buggy - Gruppe G
 //Marcel Ochsendorf 11.06.2020
 //marcelochsendorf.com
@@ -45,8 +45,9 @@ UltrasonicDriver ultraschall;
 /// Interrupt Routine for STRG-C
 void signalHandler(int signum)
 {
-  std::cout << "Strg-C Programmende" << std::endl;
-  exit(signum);
+	motors.drive_stop();
+  	std::cout << "Strg-C Programmende" << std::endl;
+  	exit(signum);
 }
 
 
@@ -100,7 +101,7 @@ int main()
 
 
   //------------ TASK_2 3 SLALOM + HINDERNISSEN AUSWEISCHEN--------------------- //
-  //ROBOTER FÄHRT GERADEAUS AB EINER DISTANZ VON WENIGER ALS 20cm WIRD EIN RECHTECK ZUR KOLLISIONSVERMEIDUNG GEFAHREN
+  //ROBOTER FÃ„HRT GERADEAUS AB EINER DISTANZ VON WENIGER ALS 20cm WIRD EIN RECHTECK ZUR KOLLISIONSVERMEIDUNG GEFAHREN
 
   for (int i = 0; i < 360 * 5; i++) {
 	  float abstand = ultraschall.measure_distance(); //MESSE DISTANZ
