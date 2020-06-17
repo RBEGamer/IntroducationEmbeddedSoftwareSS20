@@ -1,4 +1,4 @@
-// Einführung Embedded Software - SS2020 - 55646
+// EinfÃ¼hrung Embedded Software - SS2020 - 55646
 //ProjektPhase Buggy - Gruppe G
 //Marcel Ochsendorf 11.06.2020
 //marcelochsendorf.com
@@ -45,6 +45,7 @@ UltrasonicDriver ultraschall;
 /// Interrupt Routine for STRG-C
 void signalHandler(int signum)
 {
+  motors.drive_stop();
   std::cout << "Strg-C Programmende" << std::endl;
   exit(signum);
 }
@@ -111,7 +112,7 @@ int main()
 
 
   //------------ TASK_3 3 RECHTECKFAHRENT-------------------- //
-//DREHT SICH IM RECHTECK MIT KOMPASS UNTERSTÜZUNG
+//DREHT SICH IM RECHTECK MIT KOMPASS UNTERSTÃœZUNG
   
 
   //RECHTECK HAT VIER ECKEN
@@ -119,7 +120,7 @@ int main()
       motors.drive_forward(100);
       delay(1000);
 
-      //SPEICHERE DEN STARTPUNKT BEVOR DIE DREHUNG ANFÄNGT
+      //SPEICHERE DEN STARTPUNKT BEVOR DIE DREHUNG ANFÃ„NGT
       float degree_startpunkt_der_drehung = get_current_compass_heading();
         //BESTIMME DEN ZIELWINKEL MIT OVERVLOW > 360 GRAD
       float destination_degree = degree_startpunkt_der_drehung + 90.0;
@@ -139,7 +140,7 @@ int main()
           float already_roated_degree = std::abs(tmp_heading - destination_degree);
           std::cout << "--- ALREADY ROTATED DEGREE " << already_roated_degree <<  " -> "<< tmp_heading << " ---" <<std::endl;
           //DREHE SOLANGE BIS STAET UND ZIELWINKEL (FAST GLEICH SIND)
-          //DIE 10.0 GRAD SIND WEGEN DER GROBEN UNGENAUIGKEIT DES SENSORS EINGEPLANT DA 1 GRAD ODER ÄHNLICH IN MEINEM TESTAUFBAUE NICHT ERRECHT WERDEN KONNTEN
+          //DIE 10.0 GRAD SIND WEGEN DER GROBEN UNGENAUIGKEIT DES SENSORS EINGEPLANT DA 1 GRAD ODER Ã„HNLICH IN MEINEM TESTAUFBAUE NICHT ERRECHT WERDEN KONNTEN
           if (already_roated_degree < 10.0) {
               motors.drive_stop();
               break;
