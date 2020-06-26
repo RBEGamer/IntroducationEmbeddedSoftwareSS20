@@ -1,0 +1,20 @@
+########## ANLEITUNG EXECUTABLES ###########
+
+Die Leds, UltraschallSensor und die beiden I2C Sensoren werden wie im Portfolio beschrieben angeschlossen.
+
+Für jeden Task gibt es einen Ordner (TASK_1, TASK_2 usw.). In diesen befinden sich die Aufgabenteile.
+
+In jedem Aufgaben-Ordner befinden sich zum einen die Bilder/Videos und einen Ordner SRC.
+In diesem Ordner befindet sich ein Visual Studio Projekt, welches geöffnet werden kann.
+Wenn Visual Studio (>= V19) zum Ausführen verwendet werden soll, muss die IP Adresse des RPI unter den Build Konfigurationen angepasst werden.
+Aktuell ist dies 192.168.178.83.
+
+Wenn der Code ohne Visual Studio ausgeführt werden soll. Kann dies per make geschehen.
+Dazu in den SRC/TASK3/ Ordner gehen und dort ein Verzeichnis build anlgegen.
+Per Kommando make wird das Projekt gebaut.
+Per make run kann die Executable gestartet werden.
+
+
+Eine auf dem RPI funktionierene Executable liegt im Ordner SRC/TASK3/build/main.out für jede Aufgabe.
+Diese kann per SRC/TASK3/build$ ./main.out gestartet werden.
+
