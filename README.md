@@ -1,4 +1,4 @@
-# EmbeddedSoftwareSS20
+# EmbeddedSoftwareSS2020
 Practical lessons for embedded software SS2020
 
 
